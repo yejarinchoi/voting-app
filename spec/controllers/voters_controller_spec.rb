@@ -12,4 +12,56 @@ RSpec.describe VotersController do
       expect(response).to be_ok
     end
   end
+
+  describe "#create" do
+    let(:email) { "blue@sky.com" }
+    let(:password) { "bl00p2315" }
+    let(:zip_code) { "77024" }
+    let(:params) {
+      {
+        voter: {
+          email: email,
+          password: password,
+          zip_code: zip_code
+        }
+      }
+    }
+
+    context "with valid params" do
+      it "creates a new voter" do
+        expect do
+          post :create, params: params
+        end.to change(Voter, :count).by 1
+      end
+    end
+
+    context "with invalid params" do
+      context "missing email" do
+        let(:email) { "" }
+        it "does not create a voter and sends back error" do
+          expect do
+            post :create, params: params
+          end.to change(Voter, :count).by 0
+        end
+      end
+
+      context "missing password" do
+        let(:password) { "" }
+        it "does not create a voter and sends back error" do
+          expect do
+            post :create, params: params
+          end.to change(Voter, :count).by 0
+        end
+      end
+
+      context "missing zip_code" do
+        let(:zip_code) { "" }
+        it "does not create a voter and sends back error" do
+          expect do
+            post :create, params: params
+          end.to change(Voter, :count).by 0
+        end
+      end
+    end
+  end
 end
