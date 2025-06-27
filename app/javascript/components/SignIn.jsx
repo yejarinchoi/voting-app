@@ -42,6 +42,7 @@ const SignIn = ({ title }) => {
     // Basic validation
     return (
         <div className="login-container">
+            <h2>Sign in to vote</h2>
             <form onSubmit={handleSubmit} className="login-form">
                 <h2>{title}</h2>
                 <div className="form-group">
@@ -54,7 +55,7 @@ const SignIn = ({ title }) => {
                 </div>
                 <div className="form-group">
                     <label htmlFor="zip_code">Zip Code:</label>
-                    <input name="zip_code" type="zipcode" value={formData.zip_code} onChange={handleChange} required/>
+                    <input name="zip_code" type="text" value={formData.zip_code} onChange={handleChange} required/>
                 </div>
                 <button type="submit">Log In</button>
                 <div>{message}</div>
