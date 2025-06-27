@@ -20,4 +20,8 @@
 #
 class Voter < ApplicationRecord
   belongs_to :performer, optional: true
+
+  validates :email, presence: true, uniqueness: true
+  validates :password, presence: true
+  validates :zip_code, presence: true
 end

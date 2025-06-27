@@ -9,9 +9,10 @@ class VotersController < ApplicationController
 
     if @voter.valid?
       @voter.save
+      session[:voter_id] = @voter.id
       render json: { message: "Success" }
     else
-      render json: { message: "Failed to save" }
+      render json: { errors: @voter.errors.full_messages }
     end
   end
 
