@@ -14,7 +14,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_27_062050) do
   create_table "performers", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name"
+    t.string "name", null: false
   end
 
   create_table "voters", force: :cascade do |t|
