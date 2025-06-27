@@ -98,6 +98,7 @@ RSpec.describe PerformersController, type: :controller do
 
         expect(voter.reload.performer_id).to be_nil
         expect(response).not_to be_ok
+        expect(response.body).to include("You must choose a performer")
       end
     end
   end

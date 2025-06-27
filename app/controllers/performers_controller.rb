@@ -9,24 +9,28 @@ class PerformersController < ApplicationController
 
     if @performer.valid?
       @performer.save!
-      performer_id = @performer.id
-      update_voter_choice(performer_id)
+      @performer_id = @performer.id
+      update_voter_choice
     else
       render json: { errors: @performer.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
   def cast_vote
-    update_voter_choice(existing_performer_params[:performer_id])
+    @performer_id = existing_performer_params[:performer_id]
+    if @performer_id.present?
+      update_voter_choice
+    else
+      render json: { errors: "You must choose a performer" }, status: :unprocessable_entity
+    end
   end
 
   private
 
-  def update_voter_choice(performer_id)
+  def update_voter_choice
     current_voter = Voter.find(session[:voter_id])
 
-    # what if current_voter is nil? Shouldn't happen but what if it does...
-    current_voter&.assign_attributes(performer_id: performer_id)
+    current_voter&.assign_attributes(performer_id: @performer_id)
 
     if current_voter&.valid?
       current_voter.save!
