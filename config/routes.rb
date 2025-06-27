@@ -8,5 +8,6 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "home#index"
 
-  get "sign_in", to: "voters#new"
+  resources :voters, only: [:new, :create]
+  get "/sign_in", to: "voters#new"
 end

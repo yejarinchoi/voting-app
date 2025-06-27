@@ -1,62 +1,67 @@
 import React, { useState } from 'react';
 
-const SignIn = ({ message }) => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [zipcode, setZipcode] = useState('');
+const SignIn = ({ title }) => {
     const [error, setError] = useState('');
 
-    const handleSubmit = (event) => {
+    const [formData, setFormData] = useState({ email: '', password: '', zip_code: ''});
+    const [message, setMessage] = useState('');
+
+    const handleChange = e => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async event => {
         event.preventDefault(); // Prevent default form submission behavior
 
-        if (!email || !password || !zipcode) {
-            setError('Please enter email, password, and zip code.');
-            return;
-        }
+        const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
 
+        debugger
+        try {
+            const response = await fetch('/voters', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-CSRF-Token': csrfToken
+                },
+                body: JSON.stringify({ voter: formData }),
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+                setMessage(`Success: ${data.message}`);
+            } else {
+                setMessage(`Error: ${data.errors.join(', ')}`);
+            }
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            setMessage('Something went wrong.');
+        }
     };
 
     // Basic validation
     return (
         <div className="login-container">
             <form onSubmit={handleSubmit} className="login-form">
-                <h2>Login</h2>
+                <h2>{title}</h2>
                 {error && <p className="error-message">{error}</p>}
                 <div className="form-group">
                     <label htmlFor="email">Email:</label>
-                    <input
-                        type="email"
-                        id="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
+                    <input name="email" type="email" value={formData.email} onChange={handleChange} required/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="password">Password:</label>
-                    <input
-                        type="password"
-                        id="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
+                    <input name="password" type="password" value={formData.password} onChange={handleChange} required/>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="zipcode">Password:</label>
-                    <input
-                        type="zipcode"
-                        id="zipcode"
-                        value={zipcode}
-                        onChange={(e) => setZipcode(e.target.value)}
-                        required
-                    />
+                    <label htmlFor="zip_code">Zip Code:</label>
+                    <input name="zip_code" type="zipcode" value={formData.zip_code} onChange={handleChange} required/>
                 </div>
                 <button type="submit">Log In</button>
+                <div>{message}</div>
             </form>
         </div>
     );
-
 };
 
 export default SignIn;

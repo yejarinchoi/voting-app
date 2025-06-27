@@ -19,5 +19,5 @@
 #  performer_id  (performer_id => performers.id)
 #
 class Voter < ApplicationRecord
-  has_one :performer, optional: true
+  belongs_to :performer, optional: true
 end
