@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 
-const ButtonAppBar = ({ showSignIn }) => {
+const ButtonAppBar = ({ showSignIn, userEmail }) => {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
@@ -26,6 +26,7 @@ const ButtonAppBar = ({ showSignIn }) => {
                         Music Fest Voting App
                     </Typography>
                     {showSignIn && <Button color="inherit" href="/sign_in">Sign In</Button>}
+                    {!showSignIn && userEmail && <p>You're signed in as {userEmail}!</p>}
                 </Toolbar>
             </AppBar>
         </Box>
