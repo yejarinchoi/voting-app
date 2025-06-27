@@ -1,7 +1,24 @@
 import React, { useState } from 'react';
+import AppButtonBar from "./shared/AppBar";
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Stack from '@mui/material/Stack';
+import { styled } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
+
+const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: (theme.vars ?? theme).palette.text.secondary,
+    ...theme.applyStyles('dark', {
+        backgroundColor: '#1A2027',
+    }),
+}));
 
 const SignIn = ({ title }) => {
-    const [error, setError] = useState('');
 
     const [formData, setFormData] = useState({ email: '', password: '', zip_code: ''});
     const [message, setMessage] = useState('');
@@ -29,6 +46,7 @@ const SignIn = ({ title }) => {
 
             const data = await response.json();
             if (response.ok) {
+                window.location.href = '/vote';
                 setMessage(`Success: ${data.message}`);
             } else {
                 setMessage(`Error: ${data.errors.join(', ')}`);
@@ -41,26 +59,44 @@ const SignIn = ({ title }) => {
 
     // Basic validation
     return (
-        <div className="login-container">
+        <Box sx={{flexGrow: 1, margin: 2}}>
+            <AppButtonBar></AppButtonBar>
             <form onSubmit={handleSubmit} className="login-form">
-                <h2>{title}</h2>
-                {error && <p className="error-message">{error}</p>}
-                <div className="form-group">
-                    <label htmlFor="email">Email:</label>
-                    <input name="email" type="email" value={formData.email} onChange={handleChange} required/>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="password">Password:</label>
-                    <input name="password" type="password" value={formData.password} onChange={handleChange} required/>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="zip_code">Zip Code:</label>
-                    <input name="zip_code" type="zipcode" value={formData.zip_code} onChange={handleChange} required/>
-                </div>
-                <button type="submit">Log In</button>
-                <div>{message}</div>
+                <Stack spacing={2}>
+                    <Item>
+                        <div className="form-group">
+                            <label htmlFor="email">Email:</label>
+                            <input name="email" type="email" value={formData.email} onChange={handleChange} required/>
+                        </div>
+                    </Item>
+                    <Item>
+                        <div className="form-group">
+                            <label htmlFor="password">Password:</label>
+                            <input name="password" type="password" value={formData.password} onChange={handleChange}
+                                   required/>
+                        </div>
+                    </Item>
+                    <Item>
+                        <div className="form-group">
+                            <label htmlFor="zip_code">Zip Code:</label>
+                            <input name="zip_code" type="text" value={formData.zip_code} onChange={handleChange}
+                                   required/>
+                        </div>
+                    </Item>
+
+                </Stack>
+                <Grid container
+                      spacing={2}
+                      sx={{
+                          justifyContent: "center",
+                          alignItems: "center",
+                      }}
+                >
+                    <Button type="submit">Log In</Button>
+                    <div>{message}</div>
+                </Grid>
             </form>
-        </div>
+        </Box>
     );
 };
 

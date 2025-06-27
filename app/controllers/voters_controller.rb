@@ -12,7 +12,7 @@ class VotersController < ApplicationController
       session[:voter_id] = @voter.id
       render json: { message: "Success" }
     else
-      render json: { errors: @voter.errors.full_messages }
+      render json: { errors: @voter.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
