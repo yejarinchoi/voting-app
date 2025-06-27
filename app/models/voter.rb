@@ -3,9 +3,9 @@
 # Table name: voters
 #
 #  id           :integer          not null, primary key
-#  email        :string
-#  password     :string
-#  zip_code     :string
+#  email        :string           not null
+#  password     :string           not null
+#  zip_code     :string           not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  performer_id :integer

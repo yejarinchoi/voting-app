@@ -20,9 +20,9 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_27_062050) do
   create_table "voters", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "email"
-    t.string "password"
-    t.string "zip_code"
+    t.string "email", null: false
+    t.string "password", null: false
+    t.string "zip_code", null: false
     t.integer "performer_id"
     t.index ["performer_id"], name: "index_voters_on_performer_id"
   end
