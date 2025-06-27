@@ -7,7 +7,6 @@ class VotersController < ApplicationController
     @voter = Voter.new
     @voter.assign_attributes(voter_params)
 
-    binding.pry
     if @voter.valid?
       @voter.save
       render json: { message: "Success" }
