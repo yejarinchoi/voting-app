@@ -1,3 +1,18 @@
+## Author Note:
+Hi! Apologies for haphazard styling for the react components. I haven't worked with them in years so it took me a lot of time
+trying to ramp up to make changes. A lot of the code is brute forced and I'd love to learn how I could refactor + DRY things up. 
+
+Things I would've liked to spend more time on if this was a real project:
+- Actual validation on email & zip code format
+- Encrypt passwords
+- Redirect on the sign in page if already logged in (you already logged in! You can view the results here)
+  - Also not show the “sign in” link on home page if already logged in
+- Fuzzy matching on similar performer's name
+- Add some sort of javascript testing framework
+- Use a less complicated looking table
+- Figure out hosting? Can host a branch on heroku for quick demo.
+
+
 # Voting app for interview exercises
 
 This Rails and React application is the starting point for our Voting app
