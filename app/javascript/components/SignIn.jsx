@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 const SignIn = ({ title }) => {
-    const [error, setError] = useState('');
 
     const [formData, setFormData] = useState({ email: '', password: '', zip_code: ''});
     const [message, setMessage] = useState('');
@@ -29,6 +28,7 @@ const SignIn = ({ title }) => {
 
             const data = await response.json();
             if (response.ok) {
+                window.location.href = '/vote';
                 setMessage(`Success: ${data.message}`);
             } else {
                 setMessage(`Error: ${data.errors.join(', ')}`);
@@ -44,7 +44,6 @@ const SignIn = ({ title }) => {
         <div className="login-container">
             <form onSubmit={handleSubmit} className="login-form">
                 <h2>{title}</h2>
-                {error && <p className="error-message">{error}</p>}
                 <div className="form-group">
                     <label htmlFor="email">Email:</label>
                     <input name="email" type="email" value={formData.email} onChange={handleChange} required/>

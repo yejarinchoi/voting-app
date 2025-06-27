@@ -10,4 +10,12 @@ Rails.application.routes.draw do
 
   resources :voters, only: [:new, :create]
   get "/sign_in", to: "voters#new"
+
+  resources :performers, only: [:index, :create] do
+    collection do
+      put :cast_vote  # this adds PUT /performers/cast_vote => performers#cast_vote
+    end
+  end
+
+  get "/vote", to: "performers#index"
 end
