@@ -13,7 +13,7 @@ class PerformersController < ApplicationController
       update_voter_choice(performer_id)
       render json: { message: "Success" }
     else
-      render json: { errors: @voter.errors.full_messages }, status: :unprocessable_entity
+      render json: { errors: @performer.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -31,8 +31,9 @@ class PerformersController < ApplicationController
 
     if current_voter&.valid?
       current_voter.save!
+      render json: { message: "Success" }
     else
-      render json: { errors: @voter.errors.full_messages }, status: :unprocessable_entity
+      render json: { errors: current_voter.errors.full_messages }, status: :unprocessable_entity
     end
   end
 

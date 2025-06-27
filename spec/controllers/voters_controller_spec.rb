@@ -46,6 +46,8 @@ RSpec.describe VotersController do
         expect do
           post :create, params: params
         end.not_to change(Voter, :count)
+
+        expect(response).not_to be_ok
       end
     end
   end
