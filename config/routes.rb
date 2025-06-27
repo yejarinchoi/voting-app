@@ -18,4 +18,6 @@ Rails.application.routes.draw do
   end
 
   get "/vote", to: "performers#index"
+
+  get "/results", to: "home#results"
 end
