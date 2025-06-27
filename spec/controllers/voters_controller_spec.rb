@@ -28,10 +28,12 @@ RSpec.describe VotersController do
     }
 
     context "with valid params" do
-      it "creates a new voter" do
+      it "creates a new voter and sets the voter id on session" do
         expect do
           post :create, params: params
         end.to change(Voter, :count).by 1
+
+        expect(session[:voter_id]).to eq(Voter.last.id)
       end
     end
 
@@ -41,7 +43,10 @@ RSpec.describe VotersController do
         it "does not create a voter and sends back error" do
           expect do
             post :create, params: params
-          end.to change(Voter, :count).by 0
+          end.not_to change(Voter, :count)
+
+          body = response.parsed_body
+          expect(body["errors"]).to include("Email can't be blank")
         end
       end
 
@@ -50,7 +55,10 @@ RSpec.describe VotersController do
         it "does not create a voter and sends back error" do
           expect do
             post :create, params: params
-          end.to change(Voter, :count).by 0
+          end.not_to change(Voter, :count)
+
+          body = response.parsed_body
+          expect(body["errors"]).to include("Password can't be blank")
         end
       end
 
@@ -59,7 +67,10 @@ RSpec.describe VotersController do
         it "does not create a voter and sends back error" do
           expect do
             post :create, params: params
-          end.to change(Voter, :count).by 0
+          end.not_to change(Voter, :count)
+
+          body = response.parsed_body
+          expect(body["errors"]).to include("Zip code can't be blank")
         end
       end
     end
