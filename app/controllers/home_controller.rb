@@ -10,6 +10,5 @@ class HomeController < ApplicationController
 
       {name: name, count: count}
     end
-    @performers_tally
   end
 end
