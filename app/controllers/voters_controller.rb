@@ -1,9 +1,8 @@
-class UsersController < ApplicationController
+class VotersController < ApplicationController
   def new
   end
 
   def create
     # If already created, show an error
-    byebug
   end
 end

@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe UsersController do
+RSpec.describe VotersController do
   render_views
 
   describe "#new" do
