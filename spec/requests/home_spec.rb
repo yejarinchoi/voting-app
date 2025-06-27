@@ -5,7 +5,7 @@ RSpec.describe "Home", type: :request do
     it "renders a successfully" do
       get root_path
       expect(response).to be_successful
-      expect(response.body).to include('Hello, world!')
+      expect(response.body).to include('Vote for your favorite performer!')
     end
   end
 end
