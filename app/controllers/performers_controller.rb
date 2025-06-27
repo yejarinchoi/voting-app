@@ -11,7 +11,6 @@ class PerformersController < ApplicationController
       @performer.save!
       performer_id = @performer.id
       update_voter_choice(performer_id)
-      render json: { message: "Success" }
     else
       render json: { errors: @performer.errors.full_messages }, status: :unprocessable_entity
     end

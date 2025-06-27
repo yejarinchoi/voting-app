@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import AppButtonBar from "./shared/AppBar";
-import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
-import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: '#fff',
@@ -18,7 +17,7 @@ const Item = styled(Paper)(({ theme }) => ({
     }),
 }));
 
-const SignIn = ({ title }) => {
+const SignIn = () => {
 
     const [formData, setFormData] = useState({ email: '', password: '', zip_code: ''});
     const [message, setMessage] = useState('');
@@ -32,7 +31,6 @@ const SignIn = ({ title }) => {
 
         const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
 
-        debugger
         try {
             const response = await fetch('/voters', {
                 method: 'POST',
@@ -59,44 +57,38 @@ const SignIn = ({ title }) => {
 
     // Basic validation
     return (
-        <Box sx={{flexGrow: 1, margin: 2}}>
+        <Paper sx={{flexGrow: 1, margin: 2, width: '80%'}}>
             <AppButtonBar></AppButtonBar>
             <form onSubmit={handleSubmit} className="login-form">
-                <Stack spacing={2}>
-                    <Item>
-                        <div className="form-group">
-                            <label htmlFor="email">Email:</label>
-                            <input name="email" type="email" value={formData.email} onChange={handleChange} required/>
-                        </div>
-                    </Item>
-                    <Item>
-                        <div className="form-group">
-                            <label htmlFor="password">Password:</label>
-                            <input name="password" type="password" value={formData.password} onChange={handleChange}
-                                   required/>
-                        </div>
-                    </Item>
-                    <Item>
-                        <div className="form-group">
-                            <label htmlFor="zip_code">Zip Code:</label>
-                            <input name="zip_code" type="text" value={formData.zip_code} onChange={handleChange}
-                                   required/>
-                        </div>
-                    </Item>
-
-                </Stack>
                 <Grid container
                       spacing={2}
+                      margin={2}
                       sx={{
                           justifyContent: "center",
                           alignItems: "center",
+                          justifyItems: "center"
                       }}
                 >
+                    <Grid size={12} container sx={{ justifyContent: "center", alignItems: "center" }} >
+                        <Grid>
+                            <TextField label="Email" name="email" type="email" value={formData.email} onChange={handleChange} required></TextField>
+                        </Grid>
+                    </Grid>
+                    <Grid size={12} container sx={{ justifyContent: "center", alignItems: "center" }} >
+                        <Grid>
+                            <TextField label="Password" name="password" type="password" value={formData.password} onChange={handleChange} required></TextField>
+                        </Grid>
+                    </Grid>
+                    <Grid size={12} container sx={{ justifyContent: "center", alignItems: "center" }} >
+                        <Grid>
+                            <TextField label="Zip Code" name="zip_code" type="zip_code" value={formData.zip_code} onChange={handleChange} required></TextField>
+                        </Grid>
+                    </Grid>
                     <Button type="submit">Log In</Button>
                     <div>{message}</div>
                 </Grid>
             </form>
-        </Box>
+        </Paper>
     );
 };
 

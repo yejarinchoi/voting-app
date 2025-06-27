@@ -1,6 +1,16 @@
 import React, { useState } from 'react';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
+import AppButtonBar from "./shared/AppBar";
+import Paper from '@mui/material/Paper';
+import { Typography } from '@mui/material';
 
-const Vote = ({ voterId, performers }) => {
+const Vote = ({ performers, userEmail }) => {
 
     const [newPerformerName, setName] = useState('');
     const [message, setMessage] = useState('');
@@ -19,7 +29,6 @@ const Vote = ({ voterId, performers }) => {
 
         const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
 
-        debugger
         try {
             const response = await fetch(`/performers/cast_vote`, {
                 method: 'PUT',
@@ -48,7 +57,6 @@ const Vote = ({ voterId, performers }) => {
 
         const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
 
-        debugger
         try {
             const response = await fetch(`/performers`, {
                 method: 'POST',
@@ -73,37 +81,44 @@ const Vote = ({ voterId, performers }) => {
     };
 
     return (
-        <div className="login-container">
-            <h2>Cast your vote today!</h2>
+        <Paper sx={{flexGrow: 1, margin: 2, width: '80%'}}>
+            <AppButtonBar userEmail={ userEmail }></AppButtonBar>
+            <Typography variant="h3" sx={{ margin: 2 }}>Cast your vote today!</Typography>
             <form onSubmit={chooseExistingPerformer} className="existing-performer-form">
-                {performers.map((performer) => (
-                    <label key={performer.name}>
-                        <input
-                            type="radio"
-                            name="performer-${performer.id}"
-                            value={performer.id}
-                            checked={existingPerformerId === String(performer.id)}
-                            onChange={handleChange}
-                        />
-                        {performer.name}
-                    </label>
-                ))}
-                <button type="submit">Vote</button>
+                <FormControl sx={{ margin: 2 }}>
+                    <FormLabel id="existing-performers">List of Performers</FormLabel>
+                    <RadioGroup
+                        aria-labelledby="demo-controlled-radio-buttons-group"
+                        name="existing-performers-radio-buttons-group"
+                        value={existingPerformerId}
+                        onChange={handleChange}
+                    >
+                        {performers.map((performer) => (
+                            <label key={performer.name}>
+                                <FormControlLabel value={String(performer.id)} control={<Radio />} label={performer.name} />
+                            </label>
+                        ))}
+                    </RadioGroup>
+                    <Button type="submit" variant="contained">Vote</Button>
+                </FormControl>
             </form>
+
+            <Divider></Divider>
+
             <form onSubmit={createNewPerformer} className="new-performer-form">
                 <label>
+                    Or, add a new candidate:
                     <input
                         type="text"
                         name="performer-name"
                         value={newPerformerName}
                         onChange={setPerformerName}
                     />
-                    Or, add a new candidate:
                 </label>
-                <button type="submit">Vote</button>
+                <Button type="submit" variant="contained">Vote</Button>
                 <div>{message}</div>
             </form>
-        </div>
+        </Paper>
     );
 };
 
