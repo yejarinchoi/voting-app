@@ -84,7 +84,6 @@ RSpec.describe PerformersController, type: :controller do
         end.not_to change(Performer, :count)
 
         expect(voter.reload.performer_id).to eq(performer.id)
-        byebug
         expect(response).to be_ok
       end
     end
