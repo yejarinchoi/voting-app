@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    @message = "Hello, world!"
+    @message = "Vote for your favorite performer!"
   end
 end
