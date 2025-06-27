@@ -10,7 +10,7 @@ import AppButtonBar from "./shared/AppBar";
 import Paper from '@mui/material/Paper';
 import { Typography } from '@mui/material';
 
-const Vote = ({ voterId, performers, userEmail }) => {
+const Vote = ({ performers, userEmail }) => {
 
     const [newPerformerName, setName] = useState('');
     const [message, setMessage] = useState('');
