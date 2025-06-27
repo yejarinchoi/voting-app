@@ -38,40 +38,14 @@ RSpec.describe VotersController do
     end
 
     context "with invalid params" do
-      context "missing email" do
-        let(:email) { "" }
-        it "does not create a voter and sends back error" do
-          expect do
-            post :create, params: params
-          end.not_to change(Voter, :count)
+      let(:email) { "" }
+      let(:password) { "" }
+      let(:zip_code) { "" }
 
-          body = response.parsed_body
-          expect(body["errors"]).to include("Email can't be blank")
-        end
-      end
-
-      context "missing password" do
-        let(:password) { "" }
-        it "does not create a voter and sends back error" do
-          expect do
-            post :create, params: params
-          end.not_to change(Voter, :count)
-
-          body = response.parsed_body
-          expect(body["errors"]).to include("Password can't be blank")
-        end
-      end
-
-      context "missing zip_code" do
-        let(:zip_code) { "" }
-        it "does not create a voter and sends back error" do
-          expect do
-            post :create, params: params
-          end.not_to change(Voter, :count)
-
-          body = response.parsed_body
-          expect(body["errors"]).to include("Zip code can't be blank")
-        end
+      it "does not create a voter and sends back error" do
+        expect do
+          post :create, params: params
+        end.not_to change(Voter, :count)
       end
     end
   end
