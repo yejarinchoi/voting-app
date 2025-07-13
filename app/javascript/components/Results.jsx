@@ -1,11 +1,12 @@
 import React, { useMemo } from 'react';
+
+import Paper from '@mui/material/Paper';
+import Grid from "@mui/material/Grid";
+import AppButtonBar from "./shared/AppBar";
 import {
     MaterialReactTable,
     useMaterialReactTable,
 } from 'material-react-table';
-import AppButtonBar from "./shared/AppBar";
-import Grid from "@mui/material/Grid";
-import Paper from '@mui/material/Paper';
 
 
 const Results = ({ tally, userEmail }) => {

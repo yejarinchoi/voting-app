@@ -1,9 +1,11 @@
 import React from "react";
-import AppButtonBar from "./shared/AppBar.jsx"
+
+import Typography from '@mui/material/Typography';
+import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
-import Paper from '@mui/material/Paper';
-import {Typography} from "@mui/material";
+
+import AppButtonBar from "./shared/AppBar.jsx"
 
 const Home = ({ message, userEmail }) => {
   return (
