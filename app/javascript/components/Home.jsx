@@ -1,9 +1,11 @@
 import React from "react";
 
-import Typography from '@mui/material/Typography';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
-import Button from '@mui/material/Button';
+import {
+    Paper,
+    Grid,
+    Typography,
+    Button
+} from '@mui/material'
 
 import AppButtonBar from "./shared/AppBar.jsx"
 

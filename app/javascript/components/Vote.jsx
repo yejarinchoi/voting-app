@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 
-import Paper from '@mui/material/Paper';
-import Button from '@mui/material/Button';
-import { Typography } from '@mui/material';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
-import Divider from '@mui/material/Divider';
+import {
+    Paper,
+    Typography,
+    Button,
+    Divider,
+    FormControl,
+    FormLabel,
+    FormControlLabel,
+    Radio,
+    RadioGroup
+} from '@mui/material'
+
 import AppButtonBar from "./shared/AppBar";
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
 
 const Vote = ({ performers, userEmail }) => {
 

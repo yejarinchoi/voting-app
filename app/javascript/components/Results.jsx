@@ -1,13 +1,12 @@
 import React, { useMemo } from 'react';
 
-import Paper from '@mui/material/Paper';
-import Grid from "@mui/material/Grid";
-import AppButtonBar from "./shared/AppBar";
+import { Paper, Grid } from '@mui/material'
 import {
     MaterialReactTable,
     useMaterialReactTable,
 } from 'material-react-table';
 
+import AppButtonBar from "./shared/AppBar";
 
 const Results = ({ tally, userEmail }) => {
     const columns = useMemo(
