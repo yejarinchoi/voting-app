@@ -47,7 +47,7 @@ const SignIn = () => {
                 window.location.href = '/vote';
                 setMessage(`Success: ${data.message}`);
             } else {
-                setMessage(`Error: ${data.errors.join(', ')}`);
+                setMessage(`Error: ${ Array.isArray(data.errors) ? data.errors.join(', ') : data.errors }`);
             }
         } catch (error) {
             console.error('Error submitting form:', error);

@@ -44,7 +44,7 @@ const Vote = ({ performers, userEmail }) => {
             if (response.ok) {
                 window.location.href = '/';
             } else {
-                setMessage(`Error: ${data.errors.join(', ')}`);
+                setMessage(`Error: ${ Array.isArray(data.errors) ? data.errors.join(', ') : data.errors }`);
             }
         } catch (error) {
             console.error('Error submitting form:', error);
@@ -72,7 +72,7 @@ const Vote = ({ performers, userEmail }) => {
             if (response.ok) {
                 window.location.href = '/';
             } else {
-                setMessage(`Error: ${data.errors.join(', ')}`);
+                setMessage(`Error: ${ Array.isArray(data.errors) ? data.errors.join(', ') : data.errors }`);
             }
         } catch (error) {
             console.error('Error submitting form:', error);
