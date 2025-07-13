@@ -32,7 +32,7 @@ const Results = ({ tally, userEmail }) => {
 
     return (
         <Paper sx={{flexGrow: 1, margin: 2, width: '80%'}}>
-            <AppButtonBar showSignIn userEmail={userEmail}></AppButtonBar>
+            <AppButtonBar userEmail={userEmail}></AppButtonBar>
             <Grid container
                   spacing={2}
                   margin={2}
