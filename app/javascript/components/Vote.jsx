@@ -105,17 +105,19 @@ const Vote = ({ performers, userEmail }) => {
 
             <Divider></Divider>
 
-            <form onSubmit={createNewPerformer} className="new-performer-form">
+            <form onSubmit={createNewPerformer} className="new-performer-form" style={{ margin: '16px 0 0 16px'}}>
                 <label>
                     Or, add a new candidate:
+                    <br/>
                     <input
                         type="text"
                         name="performer-name"
                         value={newPerformerName}
                         onChange={setPerformerName}
+                        style={{ margin: '16px 16px 16px 0' }}
                     />
+                    <Button type="submit" variant="contained">Vote</Button>
                 </label>
-                <Button type="submit" variant="contained">Vote</Button>
                 <div>{message}</div>
             </form>
         </Paper>
