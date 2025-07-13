@@ -16,6 +16,11 @@ class VotersController < ApplicationController
     end
   end
 
+  def sign_out
+    session.delete(:voter_id)
+    redirect_to root_path
+  end
+
   def voter_params
     params.require(:voter).permit(:email, :password, :zip_code)
   end

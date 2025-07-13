@@ -27,6 +27,7 @@ const ButtonAppBar = ({ userEmail }) => {
                     </Typography>
                     { !userEmail && <Button color="inherit" href="/sign_in">Sign In</Button>}
                     { userEmail && <p>You're signed in as {userEmail}!</p>}
+                    { userEmail && <Button color="inherit" href="/sign_out">Sign Out</Button>}
                 </Toolbar>
             </AppBar>
         </Box>
