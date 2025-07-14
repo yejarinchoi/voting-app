@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
-import AppButtonBar from "./shared/AppBar";
-import Paper from '@mui/material/Paper';
+
+import {
+    Paper,
+    Grid,
+    Button,
+    TextField
+} from '@mui/material'
 import { styled } from '@mui/material/styles';
-import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
-import TextField from '@mui/material/TextField';
+
+import AppButtonBar from "./shared/AppBar";
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: '#fff',
@@ -47,7 +51,7 @@ const SignIn = () => {
                 window.location.href = '/vote';
                 setMessage(`Success: ${data.message}`);
             } else {
-                setMessage(`Error: ${data.errors.join(', ')}`);
+                setMessage(`Error: ${ Array.isArray(data.errors) ? data.errors.join(', ') : data.errors }`);
             }
         } catch (error) {
             console.error('Error submitting form:', error);

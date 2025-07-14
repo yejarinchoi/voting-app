@@ -1,9 +1,13 @@
 import React from "react";
+
+import {
+    Paper,
+    Grid,
+    Typography,
+    Button
+} from '@mui/material'
+
 import AppButtonBar from "./shared/AppBar.jsx"
-import Grid from '@mui/material/Grid';
-import Button from '@mui/material/Button';
-import Paper from '@mui/material/Paper';
-import {Typography} from "@mui/material";
 
 const Home = ({ message, userEmail }) => {
   return (

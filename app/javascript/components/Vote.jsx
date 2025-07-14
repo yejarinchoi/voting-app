@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
-import Button from '@mui/material/Button';
-import Divider from '@mui/material/Divider';
+
+import {
+    Paper,
+    Typography,
+    Button,
+    Divider,
+    FormControl,
+    FormLabel,
+    FormControlLabel,
+    Radio,
+    RadioGroup
+} from '@mui/material'
+
 import AppButtonBar from "./shared/AppBar";
-import Paper from '@mui/material/Paper';
-import { Typography } from '@mui/material';
 
 const Vote = ({ performers, userEmail }) => {
 
@@ -44,7 +48,7 @@ const Vote = ({ performers, userEmail }) => {
             if (response.ok) {
                 window.location.href = '/';
             } else {
-                setMessage(`Error: ${data.errors.join(', ')}`);
+                setMessage(`Error: ${ Array.isArray(data.errors) ? data.errors.join(', ') : data.errors }`);
             }
         } catch (error) {
             console.error('Error submitting form:', error);
@@ -72,7 +76,7 @@ const Vote = ({ performers, userEmail }) => {
             if (response.ok) {
                 window.location.href = '/';
             } else {
-                setMessage(`Error: ${data.errors.join(', ')}`);
+                setMessage(`Error: ${ Array.isArray(data.errors) ? data.errors.join(', ') : data.errors }`);
             }
         } catch (error) {
             console.error('Error submitting form:', error);
@@ -105,17 +109,19 @@ const Vote = ({ performers, userEmail }) => {
 
             <Divider></Divider>
 
-            <form onSubmit={createNewPerformer} className="new-performer-form">
+            <form onSubmit={createNewPerformer} className="new-performer-form" style={{ margin: '16px 0 0 16px'}}>
                 <label>
                     Or, add a new candidate:
+                    <br/>
                     <input
                         type="text"
                         name="performer-name"
                         value={newPerformerName}
                         onChange={setPerformerName}
+                        style={{ margin: '16px 16px 16px 0' }}
                     />
+                    <Button type="submit" variant="contained">Vote</Button>
                 </label>
-                <Button type="submit" variant="contained">Vote</Button>
                 <div>{message}</div>
             </form>
         </Paper>

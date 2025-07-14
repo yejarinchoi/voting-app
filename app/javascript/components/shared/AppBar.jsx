@@ -1,13 +1,16 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
+
+import {
+    Typography,
+    AppBar,
+    Box,
+    Toolbar,
+    Button,
+    IconButton,
+} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
-const ButtonAppBar = ({ showSignIn, userEmail }) => {
+const ButtonAppBar = ({ userEmail }) => {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
@@ -25,8 +28,9 @@ const ButtonAppBar = ({ showSignIn, userEmail }) => {
                     <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                         Music Fest Voting App
                     </Typography>
-                    {showSignIn && <Button color="inherit" href="/sign_in">Sign In</Button>}
-                    {!showSignIn && userEmail && <p>You're signed in as {userEmail}!</p>}
+                    { !userEmail && <Button color="inherit" href="/sign_in">Sign In</Button>}
+                    { userEmail && <p>You're signed in as {userEmail}!</p>}
+                    { userEmail && <Button color="inherit" href="/sign_out">Sign Out</Button>}
                 </Toolbar>
             </AppBar>
         </Box>

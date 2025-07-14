@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   resources :voters, only: [:new, :create]
   get "/sign_in", to: "voters#new"
+  get "/sign_out", to: "voters#sign_out"
 
   resources :performers, only: [:index, :create] do
     collection do
